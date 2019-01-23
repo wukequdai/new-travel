@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js100题目</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- <h3>js 100题目</h3> -->
+
+        <p>题目1：1,2,3,4能组成多少个三位数不重合的，分别是多少？</p>
+        <button class="p1">答案</button>
+
+        <p>题目2：企业发放的奖金根据利润提成。利润 (I) 低于或等于 10 万元时，奖金可提 10% ；利润高于 10 万元，低于 20 万元时，低于 10 万元的部分按 10% 提成，高于 10 万元的部分，可可提成 7.5% ； 20 万到 40 万之间时，高于 20 万元的部分，可提成 5% ； 40 万到 60 万之间时高于 40 万元的部分，可提成 3% ； 60 万到 100 万之间时，高于 60 万元的部分，可提成 1.5% ，高于 100 万元时，超过 100 万元的部分按 1% 提成，从键盘输入当月利润 I 万，求应发放奖金总数？</p>
+        <input type="number"  id="p2" value="">
+        <button class="p2">答案</button>
+
+        <p>题目3：输入某年某月某日，判断这一天是这一年的第几天？</p>
+        <label>日期：</label><input id="p3" type="date">
+        <button class="p3">提交</button>
+
+        <p>题目4：输入三个整数 x,y,z ，请把这三个数由小到大输出。</p>
+        <input type="number" name="p4-1" placeholder="第一个整数">
+        <input type="number" name="p4-2" placeholder="第二个整数">
+        <input type="number" name="p4-3" placeholder="第三个整数">
+        <button class="p4">排序</button>
+
+        <p>题目5：一个整数，它加上 100 后是一个完全平方数，再加上 168 又是一个完全平方数，请问该数是多少？</p>
+        <button class="p5">答案</button>
+
+        <p>题目6：用 * 号输出佛祖加持.</p>
+        <button class="p6">查看效果</button>
+
+        <p>题目7：妹子加持.</p>
+        <button class="p7">查看效果</button>
+    </div>
+
+    
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/layer/2.3/layer.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
+<script>
+    
+    // 题目：1,2,3,4能组成多少个三位数不重合的，分别是多少？
+    
+    $(".p1").on("click",function(){
+        var sum = 0;
+        var arr =[];
+        for(var i = 1; i < 5; i++){
+            for(var a =1; a < 5; a++){
+                for(var b = 1; b < 5;b++){
+                    if (i != a && a != b && b != i) {
+                        sum++
+                        var c = ''+i+a+b
+                        arr.push(c)
+                    }
+                }
+            }
+        }
+        layer.confirm('揭露谜底的时候到了', {
+          btn: ['总和','详情'] //按钮
+        },function(){
+            layer.msg(sum,{icon:1})
+        },function(){
+             arr = arr.toString();
+            layer.alert(arr,{icon:1})
+        })
+    })
+
+    // 题目2：企业发放的奖金根据利润提成。利润 (I) 低于或等于 10 万元时，奖金可提 10% ；利润高于 10 万元，低于 20 万元时，低于 10 万元的部分按 10% 提成，高于 10 万元的部分，可可提成 7.5% ； 20 万到 40 万之间时，高于 20 万元的部分，可提成 5% ； 40 万到 60 万之间时高于 40 万元的部分，可提成 3% ； 60 万到 100 万之间时，高于 60 万元的部分，可提成 1.5% ，高于 100 万元时，超过 100 万元的部分按 1% 提成，从键盘输入当月利润 I 万，求应发放奖金总数
+    // var p2 = $("input[name='p2']").val();
+    // var p2 =document.getElementById('p2').value;
+    $('.p2').click(function(){
+        var p2 = $("#p2").val();
+        var a;
+        if(p2>0 && p2<=10){
+            a = 0.1*p2;
+            a = a.toFixed(4);
+            layer.msg("奖金为"+a+"万")
+        }else if(p2>10 && p2<=20){
+            a = 0.075*(p2-10)+1;
+            a = a.toFixed(4);
+            layer.msg("奖金为"+a+"万")
+        }else if(p2>20 && p2<=40){
+            a = 0.05*(p2-20)+1+0.75;
+            a = a.toFixed(4);
+            layer.msg("奖金为"+a+"万")
+        }else if(p2>40 && p2<=60){
+            a = 0.03*(p2-40)+1+0.75+1;
+            a = a.toFixed(4);
+            layer.msg("奖金为"+a+"万")
+        }else if(p2>60 && p2<=100){
+            a = 0.15*(p2-60)+1+0.75+1+0.6;
+            a = a.toFixed(4);
+            layer.msg("奖金为"+a+"万")
+        }else if(p2>100){
+            a =0.01*p2+1+0.75+1+0.6;
+            a = a.toFixed(4);
+            layer.msg("奖金为"+a+"万")
+        }
+    });
+
+    // 题目3：输入某年某月某日，判断这一天是这一年的第几天？
+    $(".p3").click(function(){
+        var p3 = $("#p3").val().split('-');
+        var y = Number(p3[0]);
+        var m = Number(p3[1]);
+        var d = Number(p3[2]);
+        var day = 0;
+        switch(m){
+            case 1:
+                day=0;break;
+            case 2:
+                day=31;break;
+            case 3:
+                day=59;break;
+            case 4:
+                day=90;break;
+            case 5:
+                day=120;break;
+            case 6:
+                day=151;break;
+            case 7:
+                day=181;break;
+            case 8:
+                day=212;break;
+            case 9:
+                day=243;break;
+            case 10:
+                day=273;break;
+            case 11:
+                day=304;break;
+            case 12:
+                day=334;break;
+        }
+        if(((y%4==0&&y%100!=0)||(y%400==0))&&(m>2)){
+            day=day+1
+        }
+        day = day + d;
+        layer.msg("这一天是这一年的第"+day+"天")
+
+    })
+
+    // 题目4：输入三个整数 x,y,z ，请把这三个数由小到大输出。
+    $(".p4").click(function(){
+        var x = $("input[name='p4-1']").val();
+        var y = $("input[name='p4-2']").val();
+        var z = $("input[name='p4-3']").val();
+        var arr =[];
+        arr.push(Number(x),Number(y),Number(z));
+        arr = arr.sort(function(a,b){return a-b});
+        arr = arr.toString();
+        layer.msg(arr);
+    })
+
+    // 题目5：一个整数，它加上 100 后是一个完全平方数，再加上 168 又是一个完全平方数，请问该数是多少？
+    $(".p5").click(function(){
+        for(i=1;i<200;i++){
+            var x=parseInt(Math.sqrt(i+100));
+            var y=parseInt(Math.sqrt(i+168));
+            if(x*x==(i+100) && y*y==(i+168)){
+                console.log(i)
+            }
+
+        }
+    })
+    // 题目6：佛祖加持
+    $(".p6").click(function(){
+        console.log([
+            "                   _ooOoo_",
+            "                  o8888888o",
+            "                  88\" . \"88",
+            "                  (| -_- |)",
+            "                  O\\  =  /O",
+            "               ____/`---'\\____",
+            "             .'  \\\\|     |//  `.",
+            "            /  \\\\|||  :  |||//  \\",
+            "           /  _||||| -:- |||||-  \\",
+            "           |   | \\\\\\  -  /// |   |",
+            "           | \\_|  ''\\---/''  |   |",
+            "           \\  .-\\__  `-`  ___/-. /",
+            "         ___`. .'  /--.--\\  `. . __",
+            "      .\"\" '<  `.___\\_<|>_/___.'  >'\"\".",
+            "     | | :  `- \\`.;`\\ _ /`;.`/ - ` : | |",
+            "     \\  \\ `-.   \\_ __\\ /__ _/   .-` /  /",
+            "======`-.____`-.___\\_____/___.-`____.-'======",
+            "                   `=---='",
+            "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+            "         佛祖保佑       永无BUG"
+        ].join('\n'));
+    })
+
+    // 题目7：妹子图
+    $(".p7").click(function(){
+        console.log("%c\n       ", "font-size:241px;background:url('http://ww1.sinaimg.cn/mw600/64886177gw1egoiwupc6rj20ku0khq6q.jpg') no-repeat");
+    })
+
+    // $(function(){
+    //     $.ajax({
+    //         url: 'http://192.168.1.242:8006/application/getAllCashApplication',
+    //         type: 'POST',
+    //         contentType: "application/json",
+    //         data: JSON.stringify({'status': 1}),
+    //     })
+    //     .done(function() {
+    //         console.log("success");
+    //     })
+    //     .fail(function() {
+    //         console.log("error");
+    //     })
+    //     .always(function() {
+    //         console.log("complete");
+    //     });
+        
+    // })
+    var u = navigator.userAgent, app = navigator.appVersion;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+    if (isAndroid) {
+        console.log("安卓机！")
+    }
+    if (isIOS) {
+        console.log("苹果果机！")
+    }
+</script>
+</body>
+</html>
